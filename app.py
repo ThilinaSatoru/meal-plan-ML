@@ -8,7 +8,7 @@ import random
 
 import pandas as pd
 from flasgger import Swagger, swag_from
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 
 from swagger.params import example_params
@@ -36,7 +36,7 @@ REQUIRED_FIELDS = [
 
 
 class NumpyJSONEncoder(json.JSONEncoder):
-    """Custom JSON encoder for NumPy types"""
+    """Custom JSON encoder for NumPy types with NaN handling"""
 
     def default(self, obj):
         if isinstance(obj, (np.int_, np.intc, np.intp, np.int8,
@@ -44,6 +44,8 @@ class NumpyJSONEncoder(json.JSONEncoder):
                             np.uint16, np.uint32, np.uint64)):
             return int(obj)
         elif isinstance(obj, (np.float_, np.float16, np.float32, np.float64)):
+            if np.isnan(obj):
+                return None  # Convert NaN to None for JSON compatibility
             return float(obj)
         elif isinstance(obj, np.ndarray):
             return obj.tolist()
@@ -143,14 +145,16 @@ def get_random_recommendation(df: pd.DataFrame) -> int:
 
 
 def process_meal_info(meal_info: Any) -> Any:
-    """Convert NumPy types to Python native types in meal info"""
+    """Convert NumPy types to Python native types in meal info and handle NaN values"""
     if isinstance(meal_info, list):
-        return [{k: v.item() if isinstance(v, np.generic) else v
+        return [{k: None if isinstance(v, (float, np.float_)) and np.isnan(v) else
+                    v.item() if isinstance(v, np.generic) else v
                  for k, v in meal.items()}
                 for meal in meal_info]
     else:
-        return {k: v.item() if isinstance(v, np.generic) else v
-                for k, v in meal_info.items()}
+        return {k: None if isinstance(v, (float, np.float_)) and np.isnan(v) else
+                  v.item() if isinstance(v, np.generic) else v
+               for k, v in meal_info.items()}
 
 
 def inference_meal(sample_json: Dict[str, Any]) -> Dict[str, Any]:
@@ -198,7 +202,6 @@ def inference_meal(sample_json: Dict[str, Any]) -> Dict[str, Any]:
     }
 })
 def predict_meal():
-    """Endpoint for meal recommendation"""
     try:
         input_data = request.get_json()
         if not input_data:
@@ -206,12 +209,24 @@ def predict_meal():
 
         validate_input(input_data)
         result = inference_meal(input_data)
-        return jsonify(result)
 
-    except ValueError as e:
+        # Ensure all values are JSON serializable
+        response_json = json.dumps(result, cls=NumpyJSONEncoder)
+
+        return Response(response=response_json, status=200, mimetype='application/json')
+
+    except (ValueError, TypeError) as e:
         return jsonify({'error': str(e)}), 400
+
     except Exception as e:
         app.logger.error(f"Unexpected error: {str(e)}")
+
+        # If JSON parsing fails, return an empty response
+        try:
+            json.dumps(result, cls=NumpyJSONEncoder)  # Attempt serialization
+        except Exception:
+            return Response(response="{}", status=200, mimetype='application/json')
+
         return jsonify({'error': 'Internal server error'}), 500
 
 
