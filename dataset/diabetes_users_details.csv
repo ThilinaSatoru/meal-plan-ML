@@ -1,0 +1,11 @@
+﻿User ID,Age Group,Gender,Weight range (kg),Height range (cm),BMI Category,Current living : Urban/Rural,Diabetes Duration,Medication Duration,Other Chronic Diseases,Fasting Blood Sugar (mg/dL),Postprandial Blood Sugar (mg/dL),HbA1c Level (%),Dietary Preferences,Allergies,Avoidance Foods,Cooking Method
+U001,60–64,Male,50–59 kg,160–169 cm,Normal,Urban,4–6 years,4–6 years,Hypertension,100–125,140–179,6.5%–7.0%,Non-vegetarian,None,High-fat meats,"Boiling, Stir-frying"
+U002,70–74,Female,40–49 kg,150–159 cm,Normal,Rural,7–10 years,7–10 years,High Cholesterol,126–140,180–199,7.1%–8.0%,Vegetarian,Nuts,Processed foods,"Boiling, Coconut-based"
+U003,65–69,Male,60–69 kg,170 cm or above,Overweight,Urban,More than 10 years,More than 10 years,Heart Disease,Above 140,Above 200,Above 8.0%,Pescetarian,None,Sugary foods,"Steaming, Boiling"
+U004,75–79,Female,50–59 kg,140–149 cm,Normal,Rural,1–3 years,1–3 years,None,70–99,Less than 140,5.7%–6.4%,Vegan,Dairy,High-carb foods,"Boiling, Baking"
+U005,60–64,Female,50–59 kg,140–149 cm,Normal,Urban,4–6 years,4–6 years,"Hypertension, Kidney Disease",100–125,140–179,6.5%–7.0%,Vegetarian,Wheat/Gluten,Salty foods,"Boiling, Coconut-based"
+U006,80+,Male,70–79 kg,160–169 cm,Overweight,Rural,More than 10 years,More than 10 years,"High Cholesterol, Heart Disease",Above 140,Above 200,Above 8.0%,Non-vegetarian,None,Sugary foods,"Steaming, Boiling"
+U007,65–69,Female,40–49 kg,140–149 cm,Normal,Urban,7–10 years,7–10 years,None,126–140,180–199,7.1%–8.0%,Pescetarian,None,High-carb foods,"Boiling, Steaming"
+U008,70–74,Male,60–69 kg,160–169 cm,Overweight,Rural,1–3 years,1–3 years,Hypertension,100–125,140–179,6.5%–7.0%,Vegan,Dairy,High-fat meats,"Steaming, Boiling"
+U009,75–79,Female,Less than 40 kg,Less than 140 cm,Underweight,Urban,Less than 1 year,Not taking,None,70–99,Less than 140,Less than 5.7%,Vegetarian,Nuts,No specific avoidance,"Boiling, Stir-frying"
+U010,80+,Male,80 kg or above,170 cm or above,Overweight,Rural,7–10 years,7–10 years,"High Cholesterol, Kidney Disease",Above 140,Above 200,Above 8.0%,Non-vegetarian,None,Sugary foods,"Steaming, Boiling"

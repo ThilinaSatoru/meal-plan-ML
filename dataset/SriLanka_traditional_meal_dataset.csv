@@ -1,0 +1,5 @@
+﻿Meal ID,Meal Details,Meal Type,Glycemic Index (GI),Calories (kcal),Carbohydrates (g),Protein (g),Fats (g),Fiber (g),Galle Cultural Suitability,Allergen Information,Cooking Method,Dietary Preference
+M001,"Red Raw Rice (1 cup), Dhal Curry (2 tbsp), Steamed Fish (1 piece), Bitter Gourd Curry (2 tbsp), Banana ( 1 small)",Lunch,50,340,44,19,8,6,Yes,"Fish, Coconut milk","Boiling, Steaming",Pescetarian
+M002,"Boiled Jakfruit (1 cup),  Coconut Sambol (2 tbsp) , Polpala Herbal Drink (1 cup, unsweetened)",Breakfast,50,320,45,12,10,6,Yes,Coconut,Boiling,Vegan
+M003,"Boiled Green Gram (1 cup), Lunumiris (1 tbsp), Grated Fresh Coconut (2 tbsp), Ranawara Herbal Tea (1 cup, no sugar)",Breakfast,40,320,45,15.5,10.5,9.5,Yes,Coconut,Boiling,Vegan
+M004,"Red Rice String Hoppers (10 pieces), Dhal Curry (2 tbsp), Fish Curry (1 piece + 2 tbsp gravy), Banana (1 small), Beli Mal Herbal Tea (1 cup, no sugar)",Dinner,50,700,90,42,13,14,Yes,Fish,"Boiling, Steaming",Pescetarian
