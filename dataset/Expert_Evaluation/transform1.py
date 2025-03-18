@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Step 1: Load the original survey CSV file into a DataFrame
-input_csv_file = r'E:\PartProjects\MealPlan\meal plan recommendation\dataset\Survey_Expert_Evaluation_Galle.csv'  # Replace with your input CSV file path
+input_csv_file = r'Survey_Expert_Evaluation_Galle-Expanded.csv'  # Replace with your input CSV file path
 # df = pd.read_csv(input_csv_file)
 # Load the file with different encoding
 df = pd.read_csv(input_csv_file, encoding='utf-8-sig', sep=",", skip_blank_lines=False)
