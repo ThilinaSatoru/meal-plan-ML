@@ -15,7 +15,8 @@ def random_timestamp(start_date, end_date):
     
     return timestamp
 
-# Extract and analyze existing Ayurvedic doctor responses
+# Extract existing data and analyze Ayurvedic doctor responses
+all_existing_records = []
 ayurvedic_records = []
 header = []
 
@@ -28,6 +29,7 @@ try:
         header = next(csv_reader)  # Get header row
         
         for row in csv_reader:
+            all_existing_records.append(row)  # Save all existing records
             if "Ayurvedic Doctor" in row[1]:  # Check if this is an Ayurvedic doctor
                 ayurvedic_records.append(row)
 except FileNotFoundError:
@@ -422,7 +424,7 @@ def generate_ayurvedic_records(count):
 new_ayurvedic_records = generate_ayurvedic_records(27)
 
 # Combine existing records with new records
-all_records = ayurvedic_records + new_ayurvedic_records
+all_records = all_existing_records + new_ayurvedic_records
 
 # Write to a new CSV file
 output_file = "Survey_Expert_Evaluation_Galle-Expanded.csv"
@@ -442,4 +444,6 @@ with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
     for record in all_records:
         csv_writer.writerow(record)
 
-print(f"Generated 27 new Ayurvedic doctor records and saved all data to {output_file}")
+print(f"Successfully preserved all existing {len(all_existing_records)} records and added 27 new Ayurvedic doctor records.")
+print(f"Total records in new file: {len(all_records)}")
+print(f"Data saved to {output_file}")
