@@ -1,0 +1,31 @@
+MealID,MealName,Type,MealDetails,Calories,Carbs(g),Protein(g),Fiber(g),GlycemicLoad,AllergyStatus,Preferences
+1,Traditional Sri Lankan Balanced Plan,Breakfast,"String hoppers, pol sambol, dhal curry",350,45,12,8,Medium,Contains coconut,Vegetarian
+1,Traditional Sri Lankan Balanced Plan,Lunch,"Red rice, fish curry, mallung, papadam",500,55,20,10,Medium,"Contains fish,gluten",Pescetarian
+1,Traditional Sri Lankan Balanced Plan,Dinner,"Vegetable soup, whole wheat bread",300,35,10,7,Low,Contains gluten,Vegetarian
+2,Low-Carb High-Protein Plan,Breakfast,"Egg hoppers, lunu miris",320,20,18,5,Low,Contains eggs,Non-Vegetarian
+2,Low-Carb High-Protein Plan,Lunch,"Grilled chicken, green beans, coconut sambol",450,25,30,8,Low,Contains coconut,Non-Vegetarian
+2,Low-Carb High-Protein Plan,Dinner,Tofu stir-fry with bitter gourd,350,22,25,9,Low,None,Vegetarian
+3,Vegan Diabetes-Friendly Plan,Breakfast,"Kurakkan roti, pol sambol (no coconut)",280,40,8,12,Low,None,Vegan
+3,Vegan Diabetes-Friendly Plan,Lunch,"Red rice, jackfruit curry, gotukola salad",380,50,12,15,Medium,None,Vegan
+3,Vegan Diabetes-Friendly Plan,Dinner,"Green gram curry, steamed vegetables",300,35,15,10,Low,None,Vegan
+4,Pescetarian Mediterranean Plan,Breakfast,Kiribath with sardine sambol,320,38,15,6,Medium,Contains fish,Pescetarian
+4,Pescetarian Mediterranean Plan,Lunch,"Red rice, grilled seer fish, steamed greens",480,45,35,12,Low,Contains fish,Pescetarian
+4,Pescetarian Mediterranean Plan,Dinner,"Tuna salad with olive oil, kurakkan roti",350,25,28,8,Low,Contains fish,Pescetarian
+5,Low-GI Vegetarian Plan,Breakfast,Oats with cinnamon and nuts,280,40,10,9,Low,Contains nuts,Vegetarian
+5,Low-GI Vegetarian Plan,Lunch,"Quinoa, lentil curry, stir-fried vegetables",420,55,18,14,Low,None,Vegetarian
+5,Low-GI Vegetarian Plan,Dinner,"Mushroom and barley soup, whole wheat bread",300,42,12,10,Low,Contains gluten,Vegetarian
+6,Ayurvedic Balancing Plan,Breakfast,Finger millet porridge with ginger,250,35,8,7,Low,None,Vegan
+6,Ayurvedic Balancing Plan,Lunch,"Red rice, bitter gourd curry, mung dhal",380,50,15,13,Medium,None,Vegan
+6,Ayurvedic Balancing Plan,Dinner,Steamed jakfruit with herbal tea,220,30,6,9,Low,None,Vegan
+7,Diabetic-Friendly Non-Veg Plan,Breakfast,Egg white omelette with spinach,200,5,20,3,Low,Contains eggs,Non-Vegetarian
+7,Diabetic-Friendly Non-Veg Plan,Lunch,"Grilled chicken, roasted sweet potatoes",450,30,40,8,Low,None,Non-Vegetarian
+7,Diabetic-Friendly Non-Veg Plan,Dinner,Fish curry with string hoppers (small portion),350,25,30,6,Medium,Contains fish,Non-Vegetarian
+8,High-Fiber Vegan Plan,Breakfast,Oats with flaxseeds and berries,270,35,9,12,Low,None,Vegan
+8,High-Fiber Vegan Plan,Lunch,"Brown rice, mixed vegetable curry, dhal",400,60,16,18,Medium,None,Vegan
+8,High-Fiber Vegan Plan,Dinner,Lentil soup with whole grain bread,320,45,18,15,Low,Contains gluten,Vegan
+9,Cultural Traditional Plan,Breakfast,Pittu with coconut milk (small portion),300,40,6,5,Medium,Contains coconut,Vegetarian
+9,Cultural Traditional Plan,Lunch,"Rice, chicken curry, papadam, seeni sambol",550,65,25,8,High,None,Non-Vegetarian
+9,Cultural Traditional Plan,Dinner,String hoppers with mild fish curry,380,45,20,7,Medium,Contains fish,Non-Vegetarian
+10,Light Calorie-Restricted Plan,Breakfast,Herbal tea with whole wheat toast,150,25,5,4,Low,Contains gluten,Vegetarian
+10,Light Calorie-Restricted Plan,Lunch,Clear chicken soup with vegetables,300,20,25,6,Low,None,Non-Vegetarian
+10,Light Calorie-Restricted Plan,Dinner,Steamed fish with asparagus,250,10,30,5,Low,Contains fish,Non-Vegetarian
