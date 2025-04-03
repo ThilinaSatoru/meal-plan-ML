@@ -1,0 +1,13 @@
+﻿MealID,MealName,Type,MealDetails,Calories,Carbs(g),Protein(g),Fiber(g),GlycemicLoad,AllergyStatus,Preferences
+1,high-protein (1500 cal),Breakfast,"Red Raw Rice (1 cup), Kadala Parippu Curry (2 tbsp), Boiled Egg (1 whole), Green Beans Curry (2 tbsp), Dessert : 1 Mango Sliced",320,20,18,5,Low,Contains eggs,Non-Vegetarian
+1,high-protein (1500 cal),Lunch,"Suwandel Rice (1 cup), Kadala Parippu (Dhal) (2 tbsp), Chicken Curry ( 2 tbsp with 1 piece),Thalana Batu Curry (2 tbsp), Pol Sambol (low coconut, 1 tbsp), Dessert: 2 or 3 Ugurassa Fruit",450,25,30,8,Low,Contains coconut,Non-Vegetarian
+1,high-protein (1500 cal),Dinner,"Red Rice String Hoppers (5 pieces), Chicken Curry (2 tbsp), Dessert : Guvava piece",350,22,25,9,Low,None,Non-Vegetarian
+2,Mediterranean (1800 cal),Breakfast,"Suwandel Rice (1 cup), Luffa Curry (2 tbsp), Fish Ambul Thiyal (Para, Thalapath) (1 piece), Katta  Sambol (Low Spicy) (2 tbsp), RanawaraTea (1 cup)",320,38,15,6,Medium,Contains fish,Pescetarian
+2,Mediterranean (1800 cal),Lunch,"Red Raw Rice (1 cup), Halmasso Badum (2 tbsp), Carrot Sambol (2 tbsp), (Dambala) Wing Bean Curry (2 tbsp), Mung Bean Curry (2 tbsp), Dessert: 3-4 Lovi Fruits",480,45,35,12,Low,Contains fish,Pescetarian
+2,Mediterranean (1800 cal),Dinner,"Red Raw Pittu (1 cup), Dhal Curry (2 tbsp), Steamed Fish (1 piece) ,Dessert :1 Mango Sliced",350,25,28,8,Low,Contains fish,Pescetarian
+3,Vegetarian (1600 cal),Breakfast,"Suwandel Rice Kiribath (Milk Rice, 1 cup), Cashew nut Sambol (low salt, 1 tbsp), 1 small (Ambul Kesel) Banana",280,40,10,9,Low,Contains nuts,Vegetarian
+3,Vegetarian (1600 cal),Lunch,"Red Raw Rice (1 cup), Boiled Karawala (Dried Fish, low salt, 1 piece), Kathurumurunga Mallum (2 tbsp), Luffa Curry (2 tbsp), Dessert: 1 Small (Ambul or Puwalu) Banana",420,55,18,14,Low,None,Vegetarian
+3,Vegetarian (1600 cal),Dinner,"Red Raw Hoppers (2 pieces), Seeni Sambol (2 tbsp), Beli Mal Tea (unsweetened)",300,42,12,10,Low,Contains gluten,Vegetarian
+4,Balanced (1700 cal),Breakfast,"Boiled Jakfruit (1 cup),  Coconut Sambol (2 tbsp) , Polpala Herbal Drink (1 cup, unsweetened)",350,45,12,8,Medium,Contains coconut,Vegetarian
+4,Balanced (1700 cal),Lunch,"Red Raw Rice (1 cup), Halmasso Curry (low salt, 1 tbsp), Kohila Kola Curry (2 tbsp), Beans Curry (2 tbsp), Dessert: 1Piece of Papaya",500,55,20,10,Medium,"Contains fish,gluten",Pescetarian
+4,Balanced (1700 cal),Dinner,"Suwandel Rice (1 cup), Pumpkin Curry (2 tbsp), Wing Bean Mallum (2 tbsp),  Dessert :Small Banana 1 (Ambul Kesel)",300,35,10,7,Low,Contains gluten,Vegetarian
