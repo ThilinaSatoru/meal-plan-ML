@@ -1,0 +1,13 @@
+﻿MealID,MealName,Type,MealDetails,Calories,Carbs(g),Protein(g),Fiber(g),GlycemicLoad,AllergyStatus,Preferences
+1,high-protein (1500 cal),Breakfast,"Egg hoppers, lunu miris",320,20,18,5,Low,Contains eggs,Non-Vegetarian
+1,high-protein (1500 cal),Lunch,"Grilled chicken, green beans, coconut sambol",450,25,30,8,Low,Contains coconut,Non-Vegetarian
+1,high-protein (1500 cal),Dinner,Tofu stir-fry with bitter gourd,350,22,25,9,Low,None,Non-Vegetarian
+2,Mediterranean (1800 cal),Breakfast,Kiribath with sardine sambol,320,38,15,6,Medium,Contains fish,Pescetarian
+2,Mediterranean (1800 cal),Lunch,"Red rice, grilled seer fish, steamed greens",480,45,35,12,Low,Contains fish,Pescetarian
+2,Mediterranean (1800 cal),Dinner,"Tuna salad with olive oil, kurakkan roti",350,25,28,8,Low,Contains fish,Pescetarian
+3,Vegetarian (1600 cal),Breakfast,Oats with cinnamon and nuts,280,40,10,9,Low,Contains nuts,Vegetarian
+3,Vegetarian (1600 cal),Lunch,"Quinoa, lentil curry, stir-fried vegetables",420,55,18,14,Low,None,Vegetarian
+3,Vegetarian (1600 cal),Dinner,"Mushroom and barley soup, whole wheat bread",300,42,12,10,Low,Contains gluten,Vegetarian
+4,Balanced (1700 cal),Breakfast,"String hoppers, pol sambol, dhal curry",350,45,12,8,Medium,Contains coconut,Vegetarian
+4,Balanced (1700 cal),Lunch,"Red rice, fish curry, mallung, papadam",500,55,20,10,Medium,"Contains fish,gluten",Pescetarian
+4,Balanced (1700 cal),Dinner,"Vegetable soup, whole wheat bread",300,35,10,7,Low,Contains gluten,Vegetarian
