@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Flask
+from flask_cors import CORS
 from flask_restx import Api
 
 from app.database import db
@@ -22,5 +23,7 @@ def create_app():
 
     # Register routes (passing api to register_routes)
     register_routes(app, api)
+
+    CORS(app, resources={r"/ai/*": {"origins": "http://localhost:3000"}})
 
     return app
