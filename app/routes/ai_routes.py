@@ -7,7 +7,7 @@ ai_bp = Namespace("ai", description="Operations related to plants")
 
 profile_ai_model = ai_bp.model('ProfileAiDTO', {
     'Age': fields.Integer(required=True, description='User age', example=95, min=1, max=120),
-    'Allergies': fields.String(required=False, description='Food allergies', example='Dairy', nullable=True),
+    'Allergies': fields.List(fields.String(), required=False, description='Food allergies', example='Dairy', nullable=True),
     'DietFollowed': fields.String(required=False, description='Diet type', example='Vegetarian', nullable=True),
     'FastingGlucose': fields.Integer(required=True, description='Fasting glucose level', example=130),
     'Gender': fields.String(required=True,
@@ -15,10 +15,12 @@ profile_ai_model = ai_bp.model('ProfileAiDTO', {
                             example='Female',
                             enum=['Male', 'Female', 'Other']),
     'Height': fields.Float(required=True, description='Height in cm', example=160, min=50, max=250),
-    'OtherConditions': fields.String(required=False, description='Other health conditions', example='High cholesterol',
-                                     nullable=True),
-    'TriggerFoods': fields.String(required=False, description='Foods that trigger issues', example='Sugary snacks',
-                                  nullable=True),
+    'OtherConditions': fields.List(fields.String(), required=False, description='Other health conditions',
+                                   example='High cholesterol',
+                                   nullable=True),
+    'TriggerFoods': fields.List(fields.String(), required=False, description='Foods that trigger issues',
+                                example='Sugary snacks',
+                                nullable=True),
     'Weight': fields.Float(required=True, description='Weight in kg', example=80, min=20, max=300)
 })
 

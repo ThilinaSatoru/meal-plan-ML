@@ -4,6 +4,7 @@ import random
 from collections import defaultdict
 from typing import Dict, Any, List
 
+import numpy as np
 import pandas as pd
 from flask import jsonify
 from sklearn.preprocessing import LabelEncoder
@@ -136,66 +137,112 @@ class MealRecommender:
                 df['BMI'] = self.default_values.get('BMI', 25.0)  # Default BMI
 
         # Now handle categorical features
+        # for feature in USER_CAT_FEATURES:
+        #     if feature == 'BMI' and feature in df.columns and not pd.isna(df[feature][0]):
+        #         # BMI is special - it's categorical in the model but numeric in nature
+        #         continue
+        #
+        #     if feature not in processed_input or processed_input.get(feature) == '' or pd.isna(processed_input.get(feature)):
+        #         # Use default value
+        #         if feature in self.default_values:
+        #             value = self.default_values[feature]
+        #         elif feature in self.encoder and len(self.encoder[feature].classes_) > 0:
+        #             # Use first class from encoder
+        #             value = self.encoder[feature].classes_[0]
+        #         else:
+        #             # Last resort - this shouldn't happen if encoders are properly set up
+        #             value = "Unknown"
+        #     else:
+        #         value = processed_input.get(feature)
+        #
+        #     user_allergies = user_input.get('Allergies', [])
+        #     if isinstance(user_allergies, str):
+        #         user_allergies = user_allergies.split(',')
+        #     user_allergies = [a.strip() for a in user_allergies if a.strip()]
+        #
+        #     if feature == 'Allergies':
+        #         # If allergies exist in encoder, encode them properly
+        #         if feature in self.encoder:
+        #             allergy_value = processed_input.get(feature, '')
+        #             # Check if this exact allergy is in the encoder classes
+        #             if allergy_value in self.encoder[feature].classes_:
+        #                 df[feature] = self.encoder[feature].transform([allergy_value])[0]
+        #             else:
+        #                 # Use a default value from the encoder
+        #                 df[feature] = self.encoder[feature].transform([self.encoder[feature].classes_[0]])[0]
+        #         else:
+        #             # If not in encoder, use a numeric placeholder
+        #             df[feature] = 0
+        #
+        #     # Encode the value
+        #     if feature in self.encoder:
+        #         if value in self.encoder[feature].classes_:
+        #             df[feature] = self.encoder[feature].transform([value])[0]
+        #         else:
+        #             # Use the first class if value is not in known classes
+        #             df[feature] = self.encoder[feature].transform([self.encoder[feature].classes_[0]])[0]
+        #
+        #     # NEW CODE: Handle health conditions
+        #     # Extract conditions from OtherConditions field
+        #     conditions = str(user_input.get('OtherConditions', '')).lower().split(',')
+        #     conditions = [c.strip() for c in conditions]
+        #
+        #     # Add binary columns for each condition the model expects
+        #     health_conditions = ['High cholesterol', 'Hypertension']
+        #     for condition in health_conditions:
+        #         df[condition] = 1 if condition.lower() in conditions else 0
+        #
+        #     # Make sure all required features exist
+        #     for feature_name in self.model.feature_names_:
+        #         if feature_name not in df.columns:
+        #             # Add missing features with default values
+        #             if feature_name in USER_NUM_FEATURES:
+        #                 df[feature_name] = self.default_values.get(feature_name, 0.0)
+        #             else:
+        #                 df[feature_name] = 0  # Default for binary/categorical features
+
+            # Handle categorical features
         for feature in USER_CAT_FEATURES:
-            if feature == 'BMI' and feature in df.columns and not pd.isna(df[feature][0]):
-                # BMI is special - it's categorical in the model but numeric in nature
-                continue
+                if feature == 'BMI' and feature in df.columns and not pd.isna(df.at[0, feature]):
+                    continue
 
-            if feature not in processed_input or processed_input.get(feature) == '' or pd.isna(
-                    processed_input.get(feature)):
-                # Use default value
-                if feature in self.default_values:
-                    value = self.default_values[feature]
-                elif feature in self.encoder and len(self.encoder[feature].classes_) > 0:
-                    # Use first class from encoder
-                    value = self.encoder[feature].classes_[0]
+                if feature not in processed_input:
+                    # Use default value
+                    if feature in self.default_values:
+                        value = self.default_values[feature]
+                    elif feature in self.encoder and len(self.encoder[feature].classes_) > 0:
+                        value = self.encoder[feature].classes_[0]
+                    else:
+                        value = "Unknown"
                 else:
-                    # Last resort - this shouldn't happen if encoders are properly set up
-                    value = "Unknown"
-            else:
-                value = processed_input.get(feature)
+                    value = processed_input[feature]
 
-            user_allergies = user_input.get('Allergies', '').split(',')
-            if feature == 'Allergies':
-                # If allergies exist in encoder, encode them properly
+                # Handle empty/None values
+                if isinstance(value, (list, pd.Series, np.ndarray)):
+                    # Handle array-like values
+                    if isinstance(value, pd.Series) and value.empty:
+                        value = self.default_values.get(feature, "Unknown")
+                    elif len(value) == 0:
+                        value = self.default_values.get(feature, "Unknown")
+                    elif isinstance(value, pd.Series):
+                        value = value.iloc[0]  # Take first value of series
+                    elif isinstance(value, np.ndarray):
+                        value = value[0]  # Take first value of array
+                    elif isinstance(value, list) and len(value) > 0:
+                        value = value[0]  # Take first value of list
+                else:
+                    # Handle scalar values
+                    if pd.isna(value) or value == '':
+                        value = self.default_values.get(feature, "Unknown")
+
+                # Encode the value
                 if feature in self.encoder:
-                    allergy_value = processed_input.get(feature, '')
-                    # Check if this exact allergy is in the encoder classes
-                    if allergy_value in self.encoder[feature].classes_:
-                        df[feature] = self.encoder[feature].transform([allergy_value])[0]
+                    if value in self.encoder[feature].classes_:
+                        df[feature] = self.encoder[feature].transform([value])[0]
                     else:
-                        # Use a default value from the encoder
+                        # Use the first class if value is not in known classes
                         df[feature] = self.encoder[feature].transform([self.encoder[feature].classes_[0]])[0]
-                else:
-                    # If not in encoder, use a numeric placeholder
-                    df[feature] = 0
 
-            # Encode the value
-            if feature in self.encoder:
-                if value in self.encoder[feature].classes_:
-                    df[feature] = self.encoder[feature].transform([value])[0]
-                else:
-                    # Use the first class if value is not in known classes
-                    df[feature] = self.encoder[feature].transform([self.encoder[feature].classes_[0]])[0]
-
-            # NEW CODE: Handle health conditions
-            # Extract conditions from OtherConditions field
-            conditions = str(user_input.get('OtherConditions', '')).lower().split(',')
-            conditions = [c.strip() for c in conditions]
-
-            # Add binary columns for each condition the model expects
-            health_conditions = ['High cholesterol', 'Hypertension']
-            for condition in health_conditions:
-                df[condition] = 1 if condition.lower() in conditions else 0
-
-            # Make sure all required features exist
-            for feature_name in self.model.feature_names_:
-                if feature_name not in df.columns:
-                    # Add missing features with default values
-                    if feature_name in USER_NUM_FEATURES:
-                        df[feature_name] = self.default_values.get(feature_name, 0.0)
-                    else:
-                        df[feature_name] = 0  # Default for binary/categorical features
 
         # Verify all required columns are present
         for col in USER_NUM_FEATURES + USER_CAT_FEATURES:
@@ -215,6 +262,36 @@ class MealRecommender:
 
         # Final check - fill any remaining NaNs
         df = df.fillna(0)
+
+        # Extract conditions from OtherConditions field
+        conditions = []
+        if 'OtherConditions' in user_input:
+            if isinstance(user_input['OtherConditions'], str):
+                conditions = [c.strip().lower() for c in user_input['OtherConditions'].split(',') if c.strip()]
+            elif isinstance(user_input['OtherConditions'], list):
+                conditions = [c.strip().lower() for c in user_input['OtherConditions'] if c.strip()]
+
+        # Add binary columns for each condition the model expects
+        expected_health_conditions = ['High cholesterol', 'Hypertension']
+        for condition in expected_health_conditions:
+            df[condition] = 1 if condition.lower() in conditions else 0
+
+        # Make sure all required features exist
+        for feature_name in self.model.feature_names_:
+            if feature_name not in df.columns:
+                # Add missing features with default values
+                if feature_name in USER_NUM_FEATURES:
+                    df[feature_name] = self.default_values.get(feature_name, 0.0)
+                else:
+                    df[feature_name] = 0  # Default for binary/categorical features
+
+        # Final check - ensure all required features are present
+        missing_features = [f for f in self.model.feature_names_ if f not in df.columns]
+        if missing_features:
+            print(f"Warning: Missing features: {missing_features}")
+            for feature in missing_features:
+                df[feature] = 0  # Add default value
+
 
         # return df[USER_NUM_FEATURES + USER_CAT_FEATURES]
         # return df[expected_order]
@@ -277,7 +354,14 @@ class MealRecommender:
         if not conditions:
             return meals
 
-        conditions = [c.strip().lower() for c in conditions.split(',')]
+        # Handle both string and list inputs for conditions
+        if isinstance(conditions, str):
+            conditions = [c.strip().lower() for c in conditions.split(',') if c.strip()]
+        elif isinstance(conditions, list):
+            conditions = [c.strip().lower() for c in conditions if c and isinstance(c, str)]
+        else:
+            # If it's neither string nor list, return meals unchanged
+            return meals
 
         if 'high cholesterol' in conditions:
             # Filter out high fat meals
@@ -324,11 +408,27 @@ class MealRecommender:
             if not suitable_plans:
                 suitable_plans = list(self.meal_plans.keys())[:5]  # Fallback - increase to 5 for more options
 
-            # Filter by preferences/allergies/conditions
-            user_allergies = [a.strip() for a in user_input.get('Allergies', '').split(',') if a.strip()]
+
+
             user_diet = user_input.get('DietFollowed', '')
-            user_conditions = user_input.get('OtherConditions', '')
-            trigger_foods = [t.strip() for t in user_input.get('TriggerFoods', '').split(',') if t.strip()]
+
+            # Filter by preferences/allergies/conditions
+            user_allergies = user_input.get('Allergies', [])
+            if isinstance(user_allergies, str):  # Backward compatibility
+                user_allergies = user_allergies.split(',')
+            user_allergies = [a.strip() for a in user_allergies if a.strip()]
+
+            # Handle OtherConditions (supports both list and string)
+            user_conditions = user_input.get('OtherConditions', [])
+            if isinstance(user_conditions, str):  # Backward compatibility
+                user_conditions = user_conditions.split(',')
+            user_conditions = [c.strip() for c in user_conditions if c.strip()]
+
+            # Handle TriggerFoods (supports both list and string)
+            trigger_foods = user_input.get('TriggerFoods', [])
+            if isinstance(trigger_foods, str):  # Backward compatibility
+                trigger_foods = trigger_foods.split(',')
+            trigger_foods = [t.strip() for t in trigger_foods if t.strip()]
 
             valid_plans = []
             for plan_id in suitable_plans:

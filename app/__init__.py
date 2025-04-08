@@ -24,6 +24,6 @@ def create_app():
     # Register routes (passing api to register_routes)
     register_routes(app, api)
 
-    CORS(app, resources={r"/ai/*": {"origins": "http://localhost:3000"}})
+    CORS(app, resources={r"/ai/*": {"origins": "http://localhost:3001"}})
 
     return app
